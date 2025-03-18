@@ -1,0 +1,15 @@
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\bin\Debug\net8.0\Repository.deps.json
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\bin\Debug\net8.0\Repository.dll
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\bin\Debug\net8.0\Repository.pdb
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\bin\Debug\net8.0\Domain.dll
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\bin\Debug\net8.0\Domain.pdb
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\Repository.csproj.AssemblyReference.cache
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\Repository.AssemblyInfoInputs.cache
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\Repository.AssemblyInfo.cs
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\Repository.csproj.CoreCompileInputs.cache
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\Repository.csproj.Up2Date
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\Repository.dll
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\refint\Repository.dll
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\Repository.pdb
+C:\Users\Ismay_wh57\source\repos\LinkedIn\Repository\obj\Debug\net8.0\ref\Repository.dll

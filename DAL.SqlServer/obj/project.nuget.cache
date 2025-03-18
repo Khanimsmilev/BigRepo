@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ao/PY00j4/1GwaXQrW1jqPvBFtGOm4Vz9kc8GO5/9MXDDYmcoKXs+/nwboJENsx3rC/KdVP8+s1ybgYcOlnNew==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ismay_wh57\\source\\repos\\LinkedIn\\DAL.SqlServer\\DAL.SqlServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ismay_wh57\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
+    "C:\\Users\\Ismay_wh57\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\Ismay_wh57\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
+    "C:\\Users\\Ismay_wh57\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
