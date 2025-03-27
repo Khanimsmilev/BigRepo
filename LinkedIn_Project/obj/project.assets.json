@@ -3068,11 +3068,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\BigRepo\\LinkedIn_Project\\LinkedIn_Project.csproj",
+      "projectUniqueName": "C:\\Users\\user\\source\\repos\\BigRepo\\LinkedIn_Project\\LinkedIn_Project.csproj",
       "projectName": "LinkedIn_Project",
-      "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\LinkedIn_Project\\LinkedIn_Project.csproj",
+      "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\LinkedIn_Project\\LinkedIn_Project.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\LinkedIn_Project\\obj\\",
+      "outputPath": "C:\\Users\\user\\source\\repos\\BigRepo\\LinkedIn_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3094,14 +3094,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\user\\Source\\Repos\\BigRepo\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Application\\Application.csproj"
+            "C:\\Users\\user\\source\\repos\\BigRepo\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Application\\Application.csproj"
             },
-            "C:\\Users\\user\\Source\\Repos\\BigRepo\\DAL.SqlServer\\DAL.SqlServer.csproj": {
-              "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\DAL.SqlServer\\DAL.SqlServer.csproj"
+            "C:\\Users\\user\\source\\repos\\BigRepo\\DAL.SqlServer\\DAL.SqlServer.csproj": {
+              "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\DAL.SqlServer\\DAL.SqlServer.csproj"
             },
-            "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj"
+            "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj"
             }
           }
         }

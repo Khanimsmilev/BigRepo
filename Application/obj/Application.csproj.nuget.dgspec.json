@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Source\\Repos\\BigRepo\\Application\\Application.csproj": {}
+    "C:\\Users\\user\\source\\repos\\BigRepo\\Application\\Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Source\\Repos\\BigRepo\\Application\\Application.csproj": {
+    "C:\\Users\\user\\source\\repos\\BigRepo\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\user\\source\\repos\\BigRepo\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Application\\Application.csproj",
+        "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Application\\obj\\",
+        "outputPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,14 +33,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\user\\Source\\Repos\\BigRepo\\Common\\Common.csproj": {
-                "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Common\\Common.csproj"
+              "C:\\Users\\user\\source\\repos\\BigRepo\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Common\\Common.csproj"
               },
-              "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj"
+              "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj"
               },
-              "C:\\Users\\user\\Source\\Repos\\BigRepo\\Repository\\Repository.csproj": {
-                "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Repository\\Repository.csproj"
+              "C:\\Users\\user\\source\\repos\\BigRepo\\Repository\\Repository.csproj": {
+                "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Repository\\Repository.csproj"
               }
             }
           }
@@ -125,14 +125,14 @@
         }
       }
     },
-    "C:\\Users\\user\\Source\\Repos\\BigRepo\\Common\\Common.csproj": {
+    "C:\\Users\\user\\source\\repos\\BigRepo\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\user\\source\\repos\\BigRepo\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Common\\Common.csproj",
+        "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Common\\obj\\",
+        "outputPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -154,8 +154,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj"
+              "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj"
               }
             }
           }
@@ -220,14 +220,14 @@
         }
       }
     },
-    "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj": {
+    "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -303,14 +303,14 @@
         }
       }
     },
-    "C:\\Users\\user\\Source\\Repos\\BigRepo\\Repository\\Repository.csproj": {
+    "C:\\Users\\user\\source\\repos\\BigRepo\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Users\\user\\source\\repos\\BigRepo\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Repository\\Repository.csproj",
+        "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Repository\\Repository.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Repository\\obj\\",
+        "outputPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -332,8 +332,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj"
+              "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\user\\source\\repos\\BigRepo\\Domain\\Domain.csproj"
               }
             }
           }

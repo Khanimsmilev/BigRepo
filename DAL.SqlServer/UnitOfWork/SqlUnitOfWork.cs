@@ -18,6 +18,7 @@ public class SqlUnitOfWork(string connectionString, AppDbContext context) : IUni
 
     public IRefreshtokenRepository RefreshTokenRepository => _refreshTokenRepository ??= new SqlRefreshTokenRepository(_context);
     public IPostRepository PostRepository => _postRepository ??= new SqlPostRepository(_context);
+    public IMessageRepository MessageRepository => new SqlMessageRepository(_context);
 
     public async Task<int> SaveChangesAsync()
     {

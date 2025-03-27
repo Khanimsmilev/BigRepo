@@ -12,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddTransient<IPostRepository, SqlPostRepository>();
+builder.Services.AddTransient<IMessageRepository, SqlMessageRepository>();
 
 
 
