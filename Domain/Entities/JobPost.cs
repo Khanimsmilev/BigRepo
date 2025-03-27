@@ -4,15 +4,12 @@ namespace Domain.Entities;
 
 public class JobPost : BaseEntity
 {
-    public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public string Location { get; set; }
     public string SalaryRange { get; set; }
-    public string RequiredSkills { get; set; } // AI ilə analiz üçün
+    public string RequiredSkills { get; set; } // AI ile analiz ucun lazim olacaq
     public int EmployerId { get; set; }
-    public User Employer { get; set; } // İstifadəçi ilə əlaqə
+    public User Employer { get; set; }
 
-
-    //public DateTime PostedAt { get; set; }
 }

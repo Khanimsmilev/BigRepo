@@ -2,6 +2,7 @@
 
 public enum UserRoles : int
 {
-    Admin = 1,
-    User = 2
+    User=0,
+    Admin=1,
+    Employer=3
 }

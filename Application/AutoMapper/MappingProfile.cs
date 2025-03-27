@@ -1,11 +1,10 @@
-﻿/*using Application.CQRS.Categories.Commands.Requests;
-using Application.CQRS.Categories.Commands.Responses;
+﻿using Application.CQRS.Posts.Commands;
+using Application.CQRS.Posts.DTOs;
+using Application.CQRS.Users.Commands;
 using Application.CQRS.Users.DTOs;
 using AutoMapper;
-using Domain.Entites;
-using static Application.CQRS.Users.Handlers.Register;
-using static Application.CQRS.Users.Handlers.Update;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Domain.Entities;
+
 
 namespace Application.AutoMapper;
 
@@ -13,13 +12,18 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<User, GetByIdDto>().ReverseMap();
-        CreateMap<RegisterCommand, User>().ReverseMap();
-        CreateMap<UpdateCommand, User>().ReverseMap();
-        CreateMap<User, RegisterDto>().ReverseMap();
-        CreateMap<User, UpdateDto>();
+        //user
+        CreateMap<User, GetUserByEmailResponse>().ReverseMap();
+        CreateMap<CreateUserCommand, User>().ReverseMap();
+        CreateMap<UpdateUserCommand, User>().ReverseMap();
+        CreateMap<User, CreateUserDto>().ReverseMap();
+        CreateMap<User, UpdateUserDto>();
 
-        CreateMap<Category, CreateCategoryRequest>().ReverseMap();
-        CreateMap<CreateCategoryResponse, Category>().ReverseMap();
+        //post
+        CreateMap<Post, PostDto>().ReverseMap();
+        CreateMap<CreatePostCommand, Post>().ReverseMap();
+        CreateMap<UpdatePostCommand, Post>().ReverseMap();
+        CreateMap<Post, CreatePostDto>().ReverseMap();
+        CreateMap<Post, UpdatePostDto>().ReverseMap();
     }
-}*/
+}

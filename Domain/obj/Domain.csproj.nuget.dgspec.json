@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ismay_wh57\\source\\repos\\LinkedIn\\Domain\\Domain.csproj": {}
+    "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ismay_wh57\\source\\repos\\LinkedIn\\Domain\\Domain.csproj": {
+    "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ismay_wh57\\source\\repos\\LinkedIn\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Ismay_wh57\\source\\repos\\LinkedIn\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Ismay_wh57\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ismay_wh57\\source\\repos\\LinkedIn\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Source\\Repos\\BigRepo\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ismay_wh57\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -57,6 +57,14 @@
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -75,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
