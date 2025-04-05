@@ -5,19 +5,15 @@ using Repository.Repositories;
 
 namespace DAL.SqlServer.Infrastructure
 {
-    public class SqlUserRepository : IUserRepository
+    public class SqlUserRepository(AppDbContext context) : IUserRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _context = context;
 
-        public SqlUserRepository(AppDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<List<User>> GetAll()
+        public async Task<List<User>> GetAllAsync()
         {
             return await _context.Users.Where(u => !u.IsDeleted).ToListAsync();
         }
+
 
         public async Task<User?> GetByIdAsync(int id)
         {
@@ -29,30 +25,29 @@ namespace DAL.SqlServer.Infrastructure
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
         }
 
-        public async Task RegisterAsync(User user)
+        public async Task AddAsync(User user)
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }
 
-        public async Task RemoveAsync(int id)
+        public async Task RemoveAsync(int id, int currentUserId)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-            if (user == null)
-                return;//user tapilmasa hec ne etmirik
 
             user.IsDeleted = true;
             user.DeletedDate = DateTime.Now;
-            user.DeletedBy = 0;
+            user.DeletedBy = currentUserId;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(User user)
         {
-            user.UpdatedDate = DateTime.Now;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
+
+
     }
 }

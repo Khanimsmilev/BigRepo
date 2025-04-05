@@ -2,7 +2,6 @@
 using Application.CQRS.Posts.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkedIn_Project.Controllers;
@@ -14,43 +13,63 @@ public class PostController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
 
+    [HttpPost]
+    public async Task<IActionResult> Create(AddPostCommand command)
+    {
+        var result = await _mediator.Send(command);
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllPosts()
+    public async Task<IActionResult> GetAll()
     {
         var result = await _mediator.Send(new GetAllPostsQuery());
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdatePostCommand command)
+    {
+        var result = await _mediator.Send(command);
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await _mediator.Send(new DeletePostCommand { PostId = id });
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
         return Ok(result);
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetPostById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-        var result = await _mediator.Send(new GetPostByIdQuery(id));
-        return result is not null ? Ok(result) : NotFound();
+        var result = await _mediator.Send(new GetPostByIdQuery { PostId = id });
+        if (!result.IsSuccess)
+            return NotFound(result); // BadRequest yazanda onu elave ederem
+
+        return Ok(result);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreatePost([FromBody] CreatePostCommand command)
+    [HttpGet("by-user/{userId}")]
+    public async Task<IActionResult> GetByUserId(int userId)
     {
-        var result = await _mediator.Send(command);
-        return CreatedAtAction(nameof(GetPostById), new { id=  result.Id }, result);
-    }
+        var result = await _mediator.Send(new GetPostsByUserIdQuery { UserId = userId });
+        if (!result.IsSuccess)
+            return NotFound(result);
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePost(int id, [FromBody] UpdatePostCommand command)
-    {
-        if (id != command.Id)
-            return BadRequest("ID uyğunsuzluğu!");
-
-        await _mediator.Send(command);
-        return Ok();
-    }
-
-
-    [HttpDelete("{id}")] 
-    public async Task<IActionResult> DeletePost(int id)
-    {
-        await _mediator.Send(new DeletePostCommand(id));
-        return NoContent();
+        return Ok(result);
     }
 }

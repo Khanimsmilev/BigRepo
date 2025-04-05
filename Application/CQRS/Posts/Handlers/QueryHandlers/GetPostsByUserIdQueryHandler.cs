@@ -1,30 +1,34 @@
 ﻿using Application.CQRS.Posts.DTOs;
 using Application.CQRS.Posts.Queries;
+using Application.Security;
+using Common.GlobalResponses.Generics;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Repository.Repositories;
+using Repository.Common;
 
 namespace Application.CQRS.Posts.Handlers.QueryHandlers;
 
-public class GetPostsByUserIdQueryHandler : IRequestHandler<GetPostsByUserIdQuery, List<PostDto>>
+public class GetPostsByUserIdQueryHandler(IUnitOfWork unitOfWork, IUserContext userContext)
+    : IRequestHandler<GetPostsByUserIdQuery, Result<List<PostDto>>>
 {
-    private readonly IPostRepository _postRepository;
-
-    public GetPostsByUserIdQueryHandler(IPostRepository postRepository)
+    public async Task<Result<List<PostDto>>> Handle(GetPostsByUserIdQuery request, CancellationToken cancellationToken)
     {
-        _postRepository = postRepository;
-    }
+        var currentUserId = userContext.MustGetUserId();
+        var posts = await unitOfWork.PostRepository.GetByUserIdAsync(request.UserId);
 
-    public async Task<List<PostDto>> Handle(GetPostsByUserIdQuery request, CancellationToken cancellationToken)
-    {
-        var posts = await _postRepository.GetByUserId(request.UserId).ToListAsync();
-        return posts.Select(post => new PostDto
+        var dtos = posts.Select(post => new PostDto
         {
             Id = post.Id,
             UserId = post.UserId,
             Content = post.Content,
             ImageUrl = post.ImageUrl,
-            CreatedDate = post.CreatedDate
+            VideoUrl = post.VideoUrl,
+            CommentCount = post.Comments.Count,
+            LikeCount = post.Likes.Count,
+            AuthorFullName = post.User.FirstName + " " + post.User.LastName,
+            CreatedDate = post.CreatedDate,
+            IsLikedByCurrentUser = post.Likes.Any(like => like.UserId == currentUserId && !like.IsDeleted)
         }).ToList();
+
+        return Result<List<PostDto>>.Success(dtos);
     }
 }

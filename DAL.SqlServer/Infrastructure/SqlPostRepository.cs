@@ -3,50 +3,57 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository.Repositories;
 
-namespace DAL.SqlServer.Infrastructure;
-
-public class SqlPostRepository(AppDbContext context) : IPostRepository
+public class SqlPostRepository : IPostRepository
 {
-    private readonly AppDbContext _context = context;
+    private readonly AppDbContext _context;
 
-
-    public async Task<Post> GetByIdAsync(int id)
+    public SqlPostRepository(AppDbContext context)
     {
-        return (await _context.Posts.FirstOrDefaultAsync(p => p.Id == id))!;
-    }
-
-    public IQueryable<Post> GetAll()
-    {
-        return _context.Posts.Where(p => !p.IsDeleted);
-    }
-
-    public IQueryable<Post> GetByUserId(int userId)
-    {
-        return _context.Posts.Where(p => p.UserId == userId && !p.IsDeleted);
+        _context = context;
     }
 
     public async Task AddAsync(Post post)
     {
         await _context.Posts.AddAsync(post);
-        await _context.SaveChangesAsync();
+    }
+
+    public async Task<Post?> GetByIdAsync(int id)
+    {
+        return await _context.Posts
+            .Include(p => p.User)
+            .Include(p => p.Comments)
+            .Include(p => p.Likes)
+            .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+    }
+
+    public async Task<List<Post>> GetByUserIdAsync(int userId)
+    {
+        return await _context.Posts
+            .Where(p => p.UserId == userId && !p.IsDeleted)
+            .Include(p => p.Comments)
+            .Include(p => p.Likes)
+            .ToListAsync();
+    }
+
+    public async Task<List<Post>> GetAllAsync()
+    {
+        return await _context.Posts
+            .Include(p => p.User)
+            .Include(p => p.Comments)
+            .Include(p => p.Likes)
+            .Where(p => !p.IsDeleted)
+            .ToListAsync();
     }
 
     public async Task UpdateAsync(Post post)
     {
-        post.UpdatedDate = DateTime.UtcNow;
         _context.Posts.Update(post);
-        await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(Post post)
     {
-        var post = await _context.Posts.FindAsync(id);
-        if (post != null)
-        {
-            post.IsDeleted = true;
-            post.DeletedDate = DateTime.UtcNow;
-            await _context.SaveChangesAsync();
-        }
+        post.IsDeleted = true;
+        post.DeletedDate = DateTime.UtcNow;
+        _context.Posts.Update(post);
     }
 }
-

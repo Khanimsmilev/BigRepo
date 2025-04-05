@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.CQRS.Users.Commands;
 
-public class CreateUserCommand : IRequest<Result<int>>
+public class CreateUserCommand : IRequest<Result<CreateUserResponseDto>>
 {
     public CreateUserDto User { get; set; }
 

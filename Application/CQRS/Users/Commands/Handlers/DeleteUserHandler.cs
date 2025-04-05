@@ -1,33 +1,30 @@
-﻿using Common.GlobalResponses;
+﻿using Application.CQRS.Users.Commands;
+using Application.Security;
 using Common.GlobalResponses.Generics;
 using MediatR;
-using Repository.Repositories;
+using Repository.Common;
 
-namespace Application.CQRS.Users.Commands.Handlers
+
+namespace Application.CQRS.Users.Commands.Handlers;
+public class DeleteUserCommandHandler(
+    IUnitOfWork unitOfWork,
+    IUserContext userContext
+) : IRequestHandler<DeleteUserCommand, Result<string>>
 {
-    public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, Result>
+    public async Task<Result<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        private readonly IUserRepository _userRepository;
+        var userId = userContext.MustGetUserId();
 
-        public DeleteUserHandler(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+        var user = await unitOfWork.UserRepository.GetByIdAsync(userId);
+        if (user == null) return Result<string>.Failure("User not found");
 
-        public async Task<Result> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _userRepository.GetByIdAsync(request.UserId);
-            if (user == null || user.IsDeleted)
-                return Result<int>.Failure(new List<string> { "User not found or already deleted" });
+        user.IsDeleted = true;
+        user.DeletedDate = DateTime.UtcNow;
+        user.DeletedBy = userId;
 
+        await unitOfWork.UserRepository.UpdateAsync(user);
+        await unitOfWork.SaveChangesAsync();
 
-            user.IsDeleted = true;
-            user.DeletedDate = DateTime.UtcNow;
-
-            await _userRepository.UpdateAsync(user);
-
-            return Result.Success();
-        }
+        return Result<string>.Success("User deleted successfully.");
     }
 }
-

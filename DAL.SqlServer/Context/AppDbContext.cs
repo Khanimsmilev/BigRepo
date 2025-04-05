@@ -14,5 +14,8 @@ public class AppDbContext : DbContext
     public DbSet<Message> Messages { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Comment> Comments { get; set; }
+    public DbSet<UserFollower> UserFollowers { get; set; }
+    public DbSet<UserFollowRequest> UserFollowRequests { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
 
 }

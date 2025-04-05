@@ -1,14 +1,12 @@
 ﻿using Domain.Entities;
 
-namespace Repository.Repositories
+namespace Repository.Repositories;
+public interface IPostRepository
 {
-    public interface IPostRepository
-    {
-        Task<Post> GetByIdAsync(int id);
-        IQueryable<Post> GetAll();
-        IQueryable<Post> GetByUserId(int userId);
-        Task AddAsync(Post post);
-        Task UpdateAsync(Post post);
-        Task DeleteAsync(int id);
-    }
+    Task<Post?> GetByIdAsync(int id);
+    Task<List<Post>> GetByUserIdAsync(int userId);
+    Task<List<Post>> GetAllAsync();
+    Task AddAsync(Post post);
+    Task UpdateAsync(Post post);
+    Task DeleteAsync(Post post);
 }

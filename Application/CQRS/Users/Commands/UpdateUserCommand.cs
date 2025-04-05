@@ -1,17 +1,16 @@
 ﻿using Application.CQRS.Users.DTOs;
-using Common.GlobalResponses;
+using Common.GlobalResponses.Generics;
 using MediatR;
 
-namespace Application.CQRS.Users.Commands
-{
-    public class UpdateUserCommand : IRequest<Result>
-    {
-        public UpdateUserDto User { get; set; }
+namespace Application.CQRS.Users.Commands;
 
-        public UpdateUserCommand(UpdateUserDto user)
-        {
-            User = user;
-        }
+public class UpdateUserCommand : IRequest<Result<string>>
+{
+    public UpdateUserDto Dto { get; set; }
+
+    public UpdateUserCommand(UpdateUserDto dto)
+    {
+        Dto = dto;
     }
 }
 

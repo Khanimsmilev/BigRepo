@@ -27,7 +27,7 @@ public static class TokenService
 
     public static string GenerateRefreshToken()
     {
-        var randomNumber = new byte[64]; // Daha təhlükəsiz üçün 64 byte
+        var randomNumber = new byte[64];
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(randomNumber);
         return Convert.ToBase64String(randomNumber);
@@ -39,7 +39,7 @@ public static class TokenService
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidateLifetime = false, // Expired token üçün false olmalıdır
+            ValidateLifetime = false,
             ValidateIssuerSigningKey = true,
             ValidIssuer = configuration["JWT:ValidIssuer"],
             ValidAudience = configuration["JWT:ValidAudience"],

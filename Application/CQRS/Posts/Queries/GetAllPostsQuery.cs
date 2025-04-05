@@ -1,8 +1,9 @@
-﻿using Application.CQRS.Posts.DTOs;
 using MediatR;
+using Common.GlobalResponses.Generics;
+using Application.CQRS.Posts.DTOs;
 
 namespace Application.CQRS.Posts.Queries;
 
-public class GetAllPostsQuery : IRequest<List<PostDto>>
+public class GetAllPostsQuery : IRequest<Result<List<PostDto>>>
 {
 }

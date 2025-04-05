@@ -1,78 +1,74 @@
-﻿using Application.CQRS.Users.DTOs;
+﻿using Application.CQRS.RefreshToken.Commands;
+using Application.CQRS.RefreshToken.DTOs;
+using Application.CQRS.Users.Commands;
+using Application.CQRS.Users.DTOs;
 using Application.Services;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Repository.Repositories;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace LinkedIn_Project.Controllers
+namespace LinkedIn_Project.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
 {
-    [Route("api/auth")]
-    [ApiController]
-    public class AuthController : ControllerBase 
+    private readonly IMediator _mediator;
 
-        //controllerde bezi xetalar var, deyisiklik edecem, helelik yxolamaq ucun yazilib. 
+    public AuthController(IMediator mediator)
     {
-        private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
-
-        public AuthController(IUserService userService, IConfiguration configuration)
-        {
-            _userService = userService;
-            _configuration = configuration;
-        }
-
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto request)
-        {
-            var user = await _userService.RegisterUserAsync(request);
-            if (user == null)
-                return BadRequest("User already exists or invalid data.");
-
-            return Ok(new { Message = "User registered successfully" });
-        }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto request)
-        {
-            var user = await _userService.ValidateUserAsync(request);
-            if (user == null)
-                return Unauthorized("Invalid username or password.");
-
-            var authClaims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.FirstName),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            };
-
-            var token = TokenService.CreateToken(authClaims, _configuration);
-            var refreshToken = TokenService.GenerateRefreshToken();
-           
-            await _userService.UpdateRefreshTokenAsync(user.Id, refreshToken);
-
-            return Ok(new
-            {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
-                RefreshToken = refreshToken,
-                Expiration = token.ValidTo
-            });
-        }
-
-        [HttpPost("refresh-token")]
-        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto request)
-        {
-            var newToken = await _userService.RefreshTokenAsync(request);
-            if (newToken == null)
-                return Unauthorized("Invalid refresh token.");
-
-            return Ok(newToken);
-        }
-
-        [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            await _userService.LogoutUserAsync();
-            return Ok(new { Message = "Logged out successfully" });
-        }
+        _mediator = mediator;
     }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register(RegisterUserCommand command)
+    {
+        var result = await _mediator.Send(command);
+        if (result.IsSuccess) return Ok(result.Message);
+        return BadRequest(result.Message);
+    }
+
+    [HttpPost("confirm-email")]
+    public async Task<IActionResult> ConfirmEmail(ConfirmEmailCommand command)
+    {
+        var result = await _mediator.Send(command);
+        if (result.IsSuccess) return Ok(result.Message);
+        return BadRequest(result.Message);
+    }
+
+    [HttpPost("complete-profile")]
+    public async Task<IActionResult> CompleteProfile(CompleteProfileCommand command)
+    {
+        var result = await _mediator.Send(command);
+        if (result.IsSuccess) return Ok(result.Message);
+        return BadRequest(result.Message);
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody]LoginUserCommand command)
+    {
+        var result = await _mediator.Send(command);
+        if (!result.IsSuccess)
+            return BadRequest(result);
+        return Ok(result);
+    }
+
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
+    {
+        var result = await _mediator.Send(command);
+        if (!result.IsSuccess)
+            return BadRequest(result);
+        return Ok(result);
+    }
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout([FromBody] LogoutUserCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return result.IsSuccess ? Ok(result) : BadRequest(result);
+    }
+
 }

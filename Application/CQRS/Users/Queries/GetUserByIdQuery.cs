@@ -3,13 +3,8 @@ using MediatR;
 
 namespace Application.CQRS.Users.Queries
 {
-    public class GetUserByIdQuery : IRequest<GetUserByIdResponse>
+    public class GetUserByIdQuery(int userId) : IRequest<UserDto>
     {
-        public int UserId { get; set; }
-
-        public GetUserByIdQuery(int userId)
-        {
-            UserId = userId;
-        }
+        public int UserId { get; set; } = userId;
     }
 }

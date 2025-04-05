@@ -1,8 +1,7 @@
 ﻿using Application.CQRS.Users.DTOs;
 using FluentValidation;
 
-namespace Application.CQRS.Users.Validators;
-
+namespace Application.CQRS.Users.Validators;    
 
 public class UpdateUserValidator : AbstractValidator<UpdateUserDto>
 {
@@ -16,8 +15,5 @@ public class UpdateUserValidator : AbstractValidator<UpdateUserDto>
             .NotEmpty().WithMessage("Last Name is required.")
             .Length(2, 50).WithMessage("Last Name must be between 2 and 50 characters.");
 
-        RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("Email is required.")
-            .EmailAddress().WithMessage("Invalid email format.");
     }
 }

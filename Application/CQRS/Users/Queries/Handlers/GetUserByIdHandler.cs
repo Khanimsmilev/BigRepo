@@ -1,41 +1,49 @@
 ﻿using Application.CQRS.Users.DTOs;
+using AutoMapper;
 using MediatR;
-using Repository.Repositories;
+using Repository.Common;
 
-namespace Application.CQRS.Users.Queries.Handlers
+namespace Application.CQRS.Users.Queries.Handlers;
+
+
+public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserDto>
 {
-    public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, GetUserByIdResponse>
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public GetUserByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        private readonly IUserRepository _userRepository;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public GetUserByIdHandler(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
-
-        public async Task<GetUserByIdResponse> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
-        {
-            var user = await _userRepository.GetByIdAsync(request.UserId);
-            if (user == null)
-                return null;
-
-            return new GetUserByIdResponse
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                ProfilePictureUrl = user.ProfilePictureUrl,
-                Headline = user.Headline,
-                Summary = user.Summary,
-                CurrentCompany = user.CurrentCompany,
-                CurrentPosition = user.CurrentPosition,
-                Location = user.Location,
-                Industry = user.Industry,
-                LinkedInUrl = user.LinkedInUrl,
-                Role = user.Role.ToString(),
-                LastActiveAt = user.LastActiveAt ?? DateTime.MinValue
-            };
-        }
+    public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+    {
+        var user = await _unitOfWork.UserRepository.GetByIdAsync(request.UserId);
+        if (user == null)
+            throw new KeyNotFoundException("User not found");
+        //oz custom exception middleqare yazandan sonra keynotfoundu silecem
+        return _mapper.Map<UserDto>(user);
     }
 }
+
+/*public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserDto>
+{
+private readonly IUnitOfWork _unitOfWork;
+private readonly IMapper _mapper;
+
+public GetUserByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
+{
+    _unitOfWork = unitOfWork;
+    _mapper = mapper;
+}
+
+public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+{
+    var user = await _unitOfWork.UserRepository.GetByIdAsync(request.Id);
+    if (user == null)
+        throw new NotFoundException("User not found");
+
+    return _mapper.Map<UserDto>(user);
+}
+}*/

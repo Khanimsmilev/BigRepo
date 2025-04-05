@@ -18,4 +18,14 @@ public class SqlRefreshTokenRepository(AppDbContext context) : IRefreshtokenRepo
     {
         await _context.RefreshTokens.AddAsync(refreshToken);
     }
+
+    public async Task<List<RefreshToken>> GetAllAsync()
+    {
+        return await _context.RefreshTokens.ToListAsync();
+    }
+
+    public void Remove(RefreshToken token)
+    {
+        _context.RefreshTokens.Remove(token);
+    }
 }

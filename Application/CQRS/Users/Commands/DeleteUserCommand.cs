@@ -1,16 +1,15 @@
-﻿using Common.GlobalResponses;
+﻿using Common.GlobalResponses.Generics;
 using MediatR;
 
-namespace Application.CQRS.Users.Commands
-{
-    public class DeleteUserCommand : IRequest<Result>
-    {
-        public int UserId { get; set; }
+namespace Application.CQRS.Users.Commands;
 
-        public DeleteUserCommand(int userId)
-        {
-            UserId = userId;
-        }
-    }
+public class DeleteUserCommand : IRequest<Result<string>>
+{
+/*    public int UserId { get; set; }
+
+    public DeleteUserCommand(int userId)
+    {
+        UserId = userId;
+    }*/
 }
 

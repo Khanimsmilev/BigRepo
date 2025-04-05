@@ -1,35 +1,33 @@
 ﻿using Domain.Entities;
-using Microsoft.AspNetCore.Identity;
 using System.Security.Cryptography;
 using System.Text;
 
-public class PasswordHasher : IPasswordHasher<User>
+namespace Common.Security;
+
+public class PasswordHasher : ICustomPasswordHasher
 {
-    public string HashPassword(User user, string password)
+    public string HashPassword(string password, out string salt)
     {
-        var salt = GenerateSalt();
-        user.PasswordSalt = salt;
-        return ComputeStringToSha256Hash(password, salt);
+        salt = GenerateSalt();
+        return ComputeSha256Hash(password, salt);
     }
 
-    public PasswordVerificationResult VerifyHashedPassword(User user, string hashedPassword, string providedPassword)
+
+    public bool VerifyHashedPassword(string password, string salt, string hashedPassword)
     {
-        string hashOfInput = ComputeStringToSha256Hash(providedPassword, user.PasswordSalt);
-
-        if (hashOfInput == hashedPassword)
-            return PasswordVerificationResult.Success; 
-
-        return PasswordVerificationResult.Failed;
+        var hashOfInput = ComputeSha256Hash(password, salt);
+        return hashOfInput == hashedPassword;
     }
 
-    public static string ComputeStringToSha256Hash(string plainText, string salt)
+    private string ComputeSha256Hash(string input, string salt)
     {
-        using SHA256 sha256Hash = SHA256.Create();
-        byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(plainText + salt));
-        return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+        using var sha256 = SHA256.Create();
+        var combined = Encoding.UTF8.GetBytes(input + salt);
+        var hash = sha256.ComputeHash(combined);
+        return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
     }
 
-    public static string GenerateSalt()
+    private string GenerateSalt()
     {
         byte[] saltBytes = new byte[16];
         using var rng = RandomNumberGenerator.Create();

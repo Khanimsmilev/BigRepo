@@ -15,7 +15,7 @@ namespace Application.CQRS.Users.Queries.Handlers
 
         public async Task<List<GetUserByIdResponse>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _userRepository.GetAll();
+            var users = await _userRepository.GetAllAsync();
 
             return users.Select(user => new GetUserByIdResponse
             {

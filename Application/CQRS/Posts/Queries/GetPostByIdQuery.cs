@@ -1,9 +1,10 @@
 ﻿using Application.CQRS.Posts.DTOs;
+using Common.GlobalResponses.Generics;
 using MediatR;
 
 namespace Application.CQRS.Posts.Queries;
 
-public class GetPostByIdQuery(int id) : IRequest<PostDto>
+public class GetPostByIdQuery : IRequest<Result<PostDto>>
 {
-    public int Id { get; set; } = id;
+    public int PostId { get; set; }
 }

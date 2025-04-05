@@ -32,4 +32,9 @@
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\UserFollowers\" />
+    <Folder Include="CQRS\RefreshToken\Queries\" />
+  </ItemGroup>
+
 </Project>

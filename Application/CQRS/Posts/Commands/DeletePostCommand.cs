@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Common.GlobalResponses.Generics;
+using MediatR;
 
 namespace Application.CQRS.Posts.Commands;
 
-public class DeletePostCommand(int id) : IRequest
+public class DeletePostCommand : IRequest<Result<string>>
 {
-    public int Id { get; set; } = id;
+    public int PostId { get; set; }
 }

@@ -1,37 +1,40 @@
 using Application.Security;
-using Application.Services;
+using Common.Security;
 using DAL.SqlServer;
-using DAL.SqlServer.Infrastructure;
-using Domain.Entities;
 using LinkedIn_Project.Infrastructure;
 using LinkedIn_Project.Security;
-using Microsoft.AspNetCore.Identity;
-using Repository.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddTransient<IPostRepository, SqlPostRepository>();
-builder.Services.AddTransient<IMessageRepository, SqlMessageRepository>();
-
-
-
 builder.Services.AddControllers();
-
-builder.Services.AddScoped<IUserRepository, SqlUserRepository>();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddSwaggerService();
 builder.Services.AddScoped<IUserContext, HttpUserContext>();
+builder.Services.AddScoped<ICustomPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
+
+builder.Services.AddCors(opt=>
+{
+    opt.AddPolicy("AllowFrontEnd", policy =>
+    {
+        policy.WithOrigins("http://localhost:5178")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+       
+});
+
+
+
+builder.Services.AddSwaggerGen();
 
 
 var conn = builder.Configuration.GetConnectionString("MyConn");
 builder.Services.AddSqlServerServices(conn!);
 builder.Services.AddApplicationServices();
 builder.Services.AddAuthenticationService(builder.Configuration);
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
@@ -42,8 +45,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontEnd");
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 
